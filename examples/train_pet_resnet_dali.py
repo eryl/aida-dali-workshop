@@ -337,23 +337,6 @@ def run_training(training_dataset: ImageDataset, dev_dataset: ImageDataset, test
     
     loss_fn = nn.BCEWithLogitsLoss()
 
-    ### Start by only adjusting the newly added layers, keeping the rest frozen
-    
-    max_warmup_epochs = 1
-    # Set requires_grad to False everywhere first
-    for param in model.parameters():
-        param.requires_grad = False
-    # Now just unfreeze the parameters of the classifier head    
-    parameters_to_train = list(model.fc.parameters())
-    for param in parameters_to_train:
-        param.requires_grad = True
-    # Only optimize the classification head
-    optimizer = AdamW(parameters_to_train, lr=0.003, weight_decay=1e-5)
-    model = train_model(model=model, training_dataloader=training_dataloader, 
-                  dev_dataloader=dev_dataloader, optimizer=optimizer, loss_fn=loss_fn, device=device,
-                  max_epochs=max_warmup_epochs)
-    
-    ## Now we unfreeze the model and train all parameters
     max_epochs = 1
     for param in model.parameters():
         param.requires_grad = True
