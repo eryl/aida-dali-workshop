@@ -1,0 +1,21 @@
+name: aidali
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=11.8
+  - tqdm
+  - scikit-learn
+  - matplotlib
+  - pandas
+  - seaborn
+  - nibabel
+  - monai
+  - tensorboard
+  - numpy=1.26.4 # Numpy 2.x has issues causing integer overflows with monai
+  - pip
+  - pip:
+    - nvidia-dali-cuda110
