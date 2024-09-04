@@ -169,7 +169,7 @@ def setup_data_splits():
     
     if not (cache_directory / 'data.npy').exists():
         full_dataset = ImageDataset(files, labels, transforms=get_training_transforms())
-        PreAugmentedDataset.make_cache_dir(cache_directory, full_dataset, max_epochs=5)
+        PreAugmentedDataset.make_cache_dir(cache_directory, full_dataset, max_epochs=2)
 
     indices = np.arange(len(files))
 
